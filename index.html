@@ -38,21 +38,13 @@
             <div class="couple-names">
                 <h2>Ada & Alin</h2>
             </div>
-            <div class="wheat-decoration-right"></div>
-        </section>
 
-        <section class="actions-section">
-            <div class="section-content">
-                <p>Vă așteptăm să sărbătoriți alături de noi această zi specială.</p>
-                <div class="buttons-container">
-                    <!-- Link catre Google Apps Script -->
-                    <a href="https://script.google.com/macros/s/AKfycbz8O_HuQ0WlY6egSvGp6kgyacgAaa5K4ar-zzhz2J892cgKev6j_OJXY7qLWN9bi75j/exec"
-                        class="btn primary-btn">Încarcă Poze</a>
-
-                    <!-- Pune link-ul de Google Drive Folder (View only) aici -->
-                    <a href="#" class="btn secondary-btn">Vezi Galeria</a>
-                </div>
+            <!-- GALERIA APARE DIRECT AICI -->
+            <div id="gallery-feed" class="gallery-feed">
+                <div class="spinner" id="main-loader"></div>
             </div>
+
+            <div class="wheat-decoration-right"></div>
         </section>
     </main>
 
@@ -63,7 +55,44 @@
         <p>&copy; 2026 Invitație Nuntă</p>
     </footer>
 
+    <!-- BUTON PLUTITOR INCARCARE -->
+    <button class="fab-upload" onclick="openModal()" title="Încarcă Poze">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="white">
+            <path d="M9 16h6v-6h4l-7-7-7 7h4v6zm-4 2h14v2H5z" />
+        </svg>
+        <span class="fab-text">Adaugă Poze</span>
+    </button>
+
+    <!-- MODAL CONTAINER -->
+    <div id="app-modal" class="app-modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <iframe id="app-frame" src=""></iframe>
+        </div>
+    </div>
+
+    <!-- SCRIPT CONFIG -->
+    <script>
+        // URL-ul tau de la Google Apps Script
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz8O_HuQ0WlY6egSvGp6kgyacgAaa5K4ar-zzhz2J892cgKev6j_OJXY7qLWN9bi75j/exec';
+    </script>
     <script src="script.js"></script>
+    <script>
+        function openModal() {
+            document.getElementById('app-frame').src = SCRIPT_URL; // Default view is upload
+            document.getElementById('app-modal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('app-modal').style.display = 'none';
+            document.getElementById('app-frame').src = '';
+        }
+
+        window.onclick = function (event) {
+            const modal = document.getElementById('app-modal');
+            if (event.target == modal) { closeModal(); }
+        }
+    </script>
 </body>
 
 </html>
