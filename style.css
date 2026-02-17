@@ -3,7 +3,9 @@
     --dark-gold: #99783D;
     --light-gold: #E5C580;
     --secondary-beige: #F9F5EB;
+    /* Softer beige */
     --text-dark: #4A4036;
+    /* Warm dark brown instead of black */
     --text-light: #F9F9F9;
     --font-heading: 'Playfair Display', serif;
     --font-script: 'Great Vibes', cursive;
@@ -22,6 +24,7 @@ body {
     color: var(--text-dark);
     line-height: 1.6;
     overflow-x: hidden;
+    /* Prevent horizontal scroll from decorations */
 }
 
 /* Typography */
@@ -40,7 +43,8 @@ a {
 
 /* Hero Section */
 .hero {
-    height: 60vh;
+    height: 70vh;
+    /* Taller hero */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -50,6 +54,7 @@ a {
     overflow: hidden;
 }
 
+/* Enhanced Background Gradient */
 .hero:before {
     content: '';
     position: absolute;
@@ -62,6 +67,7 @@ a {
     opacity: 0.9;
 }
 
+/* Texture overlay */
 .hero:after {
     content: '';
     position: absolute;
@@ -80,11 +86,14 @@ a {
     padding: 2rem;
     max-width: 800px;
     background: rgba(255, 255, 255, 0.85);
+    /* Box to make text readable */
     border: 1px solid var(--primary-gold);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     border-radius: 4px;
+    /* Slight radius */
 }
 
+/* Double border effect */
 .hero-content:before {
     content: '';
     position: absolute;
@@ -130,11 +139,10 @@ a {
 
 /* Couple Section */
 .couple-section {
-    padding: 4rem 2rem;
+    padding: 5rem 2rem;
     text-align: center;
     background-color: white;
     position: relative;
-    min-height: 80vh;
 }
 
 .photo-frame-container {
@@ -142,6 +150,7 @@ a {
     display: inline-block;
 }
 
+/* Wheat decorations around photo */
 .photo-frame-container:before,
 .photo-frame-container:after {
     content: '';
@@ -165,16 +174,19 @@ a {
 .photo-frame-container:after {
     right: -70px;
     transform: translateY(-50%) rotate(15deg) scaleX(-1);
+    /* Mirror */
 }
 
 .photo-frame {
-    width: 250px;
-    height: 250px;
+    width: 280px;
+    height: 280px;
     margin: 0 auto 2rem;
     border-radius: 50%;
+    /* Oval/Circle */
     overflow: hidden;
     border: 8px solid var(--secondary-beige);
     outline: 2px solid var(--primary-gold);
+    /* Double border Look */
     box-shadow: 0 10px 25px rgba(197, 160, 89, 0.2);
     display: flex;
     align-items: center;
@@ -195,47 +207,134 @@ a {
     font-style: italic;
 }
 
+.couple-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
 .couple-names h2 {
     font-size: 3.5rem;
     color: var(--dark-gold);
     font-family: var(--font-script);
-    margin-bottom: 3rem;
+    /* Use script font for names */
 }
 
-/* GALLERY FEED */
-.gallery-feed {
-    max-width: 1000px;
+/* Actions Section */
+.actions-section {
+    padding: 5rem 2rem;
+    text-align: center;
+    background-color: var(--secondary-beige);
+    background-image: radial-gradient(var(--primary-gold) 1px, transparent 1px);
+    background-size: 30px 30px;
+    /* Dotted pattern */
+}
+
+.section-content {
+    background: white;
+    padding: 3rem;
+    max-width: 600px;
     margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 15px;
-    padding: 20px;
+    border-radius: 2px;
+    border: 1px solid var(--light-gold);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
 }
 
-.gallery-card {
-    position: relative;
-    padding-bottom: 100%;
-    /* Square */
-    border-radius: 4px;
-    overflow: hidden;
-    background: #eee;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+.actions-section p {
+    font-size: 1.3rem;
+    margin-bottom: 2.5rem;
+    font-family: var(--font-heading);
+    color: var(--text-dark);
+}
+
+.buttons-container {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 1rem 3rem;
+    border-radius: 2px;
+    /* Less rounded for more elegance */
+    font-family: var(--font-heading);
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: 0.9rem;
     cursor: pointer;
-    transition: transform 0.3s;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
 }
 
-.gallery-card:hover {
-    transform: translateY(-5px);
+.primary-btn {
+    background-color: var(--primary-gold);
+    color: white;
+    border: 1px solid var(--primary-gold);
 }
 
-.gallery-card img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: opacity 0.3s;
+.primary-btn:hover {
+    background-color: var(--dark-gold);
+    border-color: var(--dark-gold);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(197, 160, 89, 0.4);
+}
+
+.secondary-btn {
+    background-color: transparent;
+    color: var(--dark-gold);
+    border: 1px solid var(--dark-gold);
+}
+
+.secondary-btn:hover {
+    background-color: var(--dark-gold);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(197, 160, 89, 0.4);
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 3rem 0;
+    background-color: var(--text-dark);
+    color: var(--light-gold);
+    font-size: 0.9rem;
+    position: relative;
+}
+
+.wheat-footer-icon {
+    height: 40px;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2.2rem;
+    }
+
+    .photo-frame-container:before,
+    .photo-frame-container:after {
+        opacity: 0.3;
+        /* Less visible on mobile to check overlap */
+    }
+
+    .couple-names h2 {
+        font-size: 2.5rem;
+    }
+
+    .buttons-container {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .btn {
+        width: 100%;
+    }
 }
 
 /* FLOATING BUTTON */
@@ -265,20 +364,8 @@ a {
     background: var(--dark-gold);
 }
 
-/* FOOTER */
-footer {
-    text-align: center;
-    padding: 3rem 0;
-    background-color: var(--text-dark);
-    color: var(--light-gold);
-    font-size: 0.9rem;
-    position: relative;
-}
-
-.wheat-footer-icon {
-    height: 40px;
-    margin-bottom: 1rem;
-    opacity: 0.5;
+.fab-upload svg {
+    fill: white;
 }
 
 /* MODAL */
@@ -291,20 +378,19 @@ footer {
     width: 100%;
     height: 100%;
     overflow: hidden;
-    background-color: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(2px);
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(4px);
     justify-content: center;
     align-items: center;
 }
 
 .modal-content {
     background-color: #fff;
-    border: 1px solid #888;
     width: 90%;
     max-width: 500px;
-    height: 70vh;
+    height: 80vh;
     position: relative;
-    border-radius: 8px;
+    border-radius: 4px;
     overflow: hidden;
 }
 
@@ -331,9 +417,40 @@ iframe {
     border: none;
 }
 
+/* GALLERY FEED & LIGHTBOX */
+.gallery-feed {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+    justify-content: center;
+}
+
+.gallery-card {
+    position: relative;
+    padding-bottom: 100%;
+    border-radius: 2px;
+    overflow: hidden;
+    background: #ddd;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.gallery-card img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.3s;
+}
+
 .spinner {
     display: block;
-    margin: 50px auto;
+    margin: 30px auto;
     width: 40px;
     height: 40px;
     border: 4px solid rgba(197, 160, 89, 0.3);
@@ -348,7 +465,6 @@ iframe {
     }
 }
 
-/* Lightbox */
 .lightbox-modal {
     display: none;
     position: fixed;
@@ -378,23 +494,19 @@ iframe {
     cursor: pointer;
 }
 
+/* Mobile Adjustments for FAB */
 @media (max-width: 768px) {
     .fab-upload {
         bottom: 20px;
         right: 20px;
-        padding: 12px 20px;
+        padding: 12px 12px;
     }
 
     .fab-text {
         display: none;
     }
 
-    /* Hide text on mobile, just icon */
     .fab-upload svg {
         margin: 0;
-    }
-
-    .gallery-feed {
-        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
     }
 }
