@@ -15,6 +15,12 @@ document.addEventListener('DOMContentLoaded', () => {
     loadGallery();
 });
 
+// Global state for Infinite Scroll
+let allImageIds = [];
+let currentIndex = 0;
+const BATCH_SIZE = 15;
+let isLoading = false;
+
 async function loadGallery() {
     const container = document.getElementById('gallery-feed');
     const loader = document.getElementById('main-loader');
@@ -24,38 +30,65 @@ async function loadGallery() {
 
     try {
         const response = await fetch(jsonUrl);
-        const imageIds = await response.json();
+        allImageIds = await response.json(); // Get ALL sorted IDs
 
         loader.style.display = 'none';
 
-        if (!imageIds || imageIds.length === 0) {
+        if (!allImageIds || allImageIds.length === 0) {
             container.innerHTML = '<p style="text-align:center; width:100%; opacity:0.6;">Încă nu sunt poze.</p>';
             return;
         }
 
-        imageIds.forEach(id => {
-            // Google Drive Thumbnail Links
-            const thumbUrl = `https://drive.google.com/thumbnail?sz=w400&id=${id}`;
-            const fullUrl = `https://drive.google.com/thumbnail?sz=w1600&id=${id}`;
+        // Load first batch
+        loadMoreImages();
 
-            const card = document.createElement('div');
-            card.className = 'gallery-card';
-            card.onclick = () => openLightbox(fullUrl);
-
-            const img = document.createElement('img');
-            img.src = thumbUrl;
-            img.loading = "lazy";
-            img.alt = "Wedding Photo";
-
-            card.appendChild(img);
-            container.appendChild(card);
+        // Setup Infinite Scroll
+        window.addEventListener('scroll', () => {
+            if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 500) {
+                loadMoreImages();
+            }
         });
 
     } catch (e) {
         console.error("Gallery Error:", e);
         loader.style.display = 'none';
-        container.innerHTML = '<p style="text-align:center; width:100%; color:red;">Eroare la încărcarea galeriei. Verifică setările folderului.</p>';
+        container.innerHTML = '<p style="text-align:center; width:100%; color:red;">Eroare la încărcarea galeriei.</p>';
     }
+}
+
+function loadMoreImages() {
+    if (isLoading || currentIndex >= allImageIds.length) return;
+
+    isLoading = true;
+    const container = document.getElementById('gallery-feed');
+
+    // Get next batch of IDs
+    const nextBatch = allImageIds.slice(currentIndex, currentIndex + BATCH_SIZE);
+
+    nextBatch.forEach(id => {
+        // Google Drive Thumbnail Links
+        const thumbUrl = `https://drive.google.com/thumbnail?sz=w400&id=${id}`;
+        const fullUrl = `https://drive.google.com/thumbnail?sz=w1600&id=${id}`;
+
+        const card = document.createElement('div');
+        card.className = 'gallery-card';
+        card.onclick = () => openLightbox(fullUrl);
+
+        const img = document.createElement('img');
+        img.src = thumbUrl;
+        img.loading = "lazy"; // Native lazy loading
+        img.alt = "Wedding Photo";
+
+        // Find animation (fade in)
+        img.style.opacity = '0';
+        img.onload = () => img.style.opacity = '1';
+
+        card.appendChild(img);
+        container.appendChild(card);
+    });
+
+    currentIndex += nextBatch.length;
+    isLoading = false;
 }
 
 // Lightbox Logic
