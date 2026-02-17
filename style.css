@@ -341,12 +341,14 @@ footer {
 .fab-upload {
     position: fixed;
     bottom: 30px;
-    right: 30px;
+    left: 50%;
+    transform: translateX(-50%);
     background: var(--primary-gold);
     color: white;
     border: none;
     border-radius: 50px;
-    padding: 15px 25px;
+    padding: 15px 40px;
+    /* Wider padding for better look in center */
     box-shadow: 0 5px 20px rgba(197, 160, 89, 0.5);
     cursor: pointer;
     z-index: 900;
@@ -355,13 +357,15 @@ footer {
     gap: 10px;
     font-family: var(--font-heading);
     font-weight: bold;
-    font-size: 1rem;
-    transition: transform 0.3s, background 0.3s;
+    font-size: 1.1rem;
+    /* Slightly larger text */
+    transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
 }
 
 .fab-upload:hover {
-    transform: scale(1.05);
+    transform: translateX(-50%) scale(1.05);
     background: var(--dark-gold);
+    box-shadow: 0 10px 25px rgba(197, 160, 89, 0.6);
 }
 
 .fab-upload svg {
@@ -498,12 +502,16 @@ iframe {
 @media (max-width: 768px) {
     .fab-upload {
         bottom: 20px;
-        right: 20px;
-        padding: 12px 12px;
+        /* Keep centering logic inherited, just adjust padding/size if needed */
+        padding: 12px 30px;
+        width: auto;
+        /* Ensure it doesn't span full width unless needed */
+        white-space: nowrap;
     }
 
     .fab-text {
-        display: none;
+        display: inline-block;
+        /* Keep text visible on mobile for clarity */
     }
 
     .fab-upload svg {
